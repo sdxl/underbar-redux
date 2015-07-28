@@ -453,6 +453,31 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+    var results = [];
+    var args = arguments;
+    var arrLongest = _.reduce(arguments, function(longest, test){
+
+        if(test.length>longest){
+          return test;
+        } else {
+          return longest;
+        }
+    });
+
+    _.each(arrLongest, function(value){
+          var pushable = true;
+      _.each(args, function(arr){
+          if(_.indexOf(arr, value) <= -1){
+            pushable = false;
+          }
+
+      })
+      if(pushable){
+        results.push(value)
+      }
+    })
+
+    return results;
   };
 
   // Take the difference between one array and a number of other arrays.
