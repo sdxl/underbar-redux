@@ -421,20 +421,6 @@
       zippedArray.push(toPush);
 
     }
-/*
-    var zippedArray = new Array(arrLength);
-    _.each(zippedArray, function(i){
-      zippedArray.push([]);
-    });
-
-
-    _.each(arguments, function(arr){
-      _.each(arr, function(value, index){
-         zippedArray[index].push(value);
-      })
-
-
-    }) */
 
 
 
@@ -446,6 +432,22 @@
   //
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
+
+    var results = [];
+
+    var flattener = function(arr) {
+      _.each(arr, function(item) {
+        if(!Array.isArray(item)) {
+          results.push(item);
+        } else {
+          flattener(item);
+        }
+      });
+    };
+
+    flattener(nestedArray);
+
+    return results;
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
