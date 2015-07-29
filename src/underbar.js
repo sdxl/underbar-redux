@@ -387,7 +387,7 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
-/*
+
     var sort = function(arr){
 
   var sorted = true;
@@ -402,9 +402,26 @@
           arr[i] = temp;
           sorted = false;
         }
+        else if (arr[i][iterator] === undefined) {
+          arr.splice(i, 1);
+          arr.push(undefined);
+
+        }
       }
 
       else{
+        if (iterator(arr[i]) > iterator(arr[j])) {
+          var temp = arr[j];
+          arr[j] = arr[i];
+          arr[i] = temp;
+          sorted = false;
+
+        }/*
+        else if (iterator(arr[i]) === undefined) {
+          arr.splice(i, 1);
+          arr.push(undefined);
+
+        }*/
 
 
       }
@@ -418,10 +435,10 @@
   }
 
 }
-*/
-    if (typeof iterator === 'string'){
 
-    }
+return sort(collection);
+
+
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -512,6 +529,19 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var newArray = array.slice();
+
+    var args = Array.prototype.slice.call(arguments, 1);
+    _.each(newArray, function(value, index){
+       _.each(args, function(arr){
+         if(_.indexOf(arr, value)) {
+           newArray.splice(index);
+         }
+       });
+
+    });
+
+    return newArray;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
