@@ -433,7 +433,19 @@
   // Hint: Use Array.isArray to check if something is an array
   _.flatten = function(nestedArray, result) {
 
+
     var results = [];
+
+    _.each(nestedArray, function(item){
+      if(!Array.isArray(item)){
+          results.push(item);
+      }else{
+          results = results.concat(_.flatten(item))
+      }
+    })
+
+    return results;
+    /*var results = [];
 
     var flattener = function(arr) {
       _.each(arr, function(item) {
@@ -448,6 +460,7 @@
     flattener(nestedArray);
 
     return results;
+    */
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
@@ -467,7 +480,7 @@
     _.each(arrLongest, function(value){
           var pushable = true;
       _.each(args, function(arr){
-          if(_.indexOf(arr, value) <= -1){
+          if(_.indexOf(arr, value) == -1){
             pushable = false;
           }
 
