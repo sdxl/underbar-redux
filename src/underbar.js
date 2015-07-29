@@ -387,7 +387,38 @@
   // of that string. For example, _.sortBy(people, 'name') should sort
   // an array of people by their name.
   _.sortBy = function(collection, iterator) {
+/*
+    var sort = function(arr){
 
+  var sorted = true;
+  for(var i=0; i<arr.length; i++){
+    for(var j=i+1; j<arr.length; j++){
+
+      if(typeof iterator === 'string'){
+        if(arr[i][iterator]>arr[j][iterator]){
+
+          var temp = arr[j];
+          arr[j] = arr[i];
+          arr[i] = temp;
+          sorted = false;
+        }
+      }
+
+      else{
+
+
+      }
+    }
+  }
+
+  if(sorted){
+    return arr
+  }else{
+    return sort(arr);
+  }
+
+}
+*/
     if (typeof iterator === 'string'){
 
     }
@@ -445,22 +476,7 @@
     })
 
     return results;
-    /*var results = [];
 
-    var flattener = function(arr) {
-      _.each(arr, function(item) {
-        if(!Array.isArray(item)) {
-          results.push(item);
-        } else {
-          flattener(item);
-        }
-      });
-    };
-
-    flattener(nestedArray);
-
-    return results;
-    */
   };
 
   // Takes an arbitrary number of arrays and produces an array that contains
